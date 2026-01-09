@@ -1,0 +1,25 @@
+
+services:
+  # 1. Web 服务 (使用您 Day 11 定制的 Nginx 镜像)
+  web:
+    image: my-custom-webserver:v1 # 使用您构建的定制镜像
+    ports:
+      - "80:80" # 将宿主机的 80 端口映射到容器的 80 端口
+    depends_on:
+      - db # 依赖于 db 服务，确保 db 先启动
+
+  # 2. 数据库服务 (使用官方 PostgreSQL 镜像)
+  db:
+    image: postgres:latest
+    restart: unless-stopped
+    environment:
+      # 设置数据库的初始配置，生产环境中必须保密
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} 
+    volumes:
+      - postgres_data:/var/lib/postgresql # 数据卷：用于持久化数据
+
+# 定义数据卷，用于存储数据库文件
+volumes:
+  postgres_data:
