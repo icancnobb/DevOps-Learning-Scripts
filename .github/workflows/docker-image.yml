@@ -1,4 +1,4 @@
-me: Docker Image CI  # 自动化任务的名字
+Docker Image CI  # 自动化任务的名字
 
 on:
   push:
