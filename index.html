@@ -1,59 +1,42 @@
-CTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>我的自动化部署中心</title>
+    <title>我的 DevOps 实验室</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            background: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
         }
-        .card {
-            background: rgba(255, 255, 255, 0.1);
+        .container {
+            background: white;
             padding: 2rem;
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             text-align: center;
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
         }
-        h1 { margin-bottom: 0.5rem; }
-        .status {
-            color: #4cd137;
-            font-weight: bold;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .badge {
-            background: #4cd137;
-            color: #1e3c72;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        h1 { color: #1a73e8; }
+        .status-dot {
+            height: 12px;
+            width: 12px;
+            background-color: #34a853;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <h1>🚀 DevOps 实验室</h1>
-        <p>这是我亲手搭建的自动化流水线</p>
-        <div class="status">
-            <span class="badge">SUCCESS</span> 
-            构建状态：全线绿灯 ✅
-        </div>
-        <p style="margin-top: 2rem; font-size: 0.9rem; opacity: 0.8;">
-            构建来源：GitHub Actions + Docker Hub
-        </p>
+    <div class="container">
+        <h1>🚀 自动化部署成功！</h1>
+        <p>这是我亲手搭建的 CI/CD 流水线生成的页面。</p>
+        <p><span class="status-dot"></span> 构建状态：全线绿灯 ✅</p>
     </div>
 </body>
 </html>
-
