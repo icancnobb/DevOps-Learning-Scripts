@@ -1,4 +1,4 @@
-FROM nginx:alpine   # 或 nginx:alpine，都行
+FROM nginx:alpine   
 
 # 复制你的静态文件（推荐用 . 复制全部，避免漏文件）
 COPY . /usr/share/nginx/html/
