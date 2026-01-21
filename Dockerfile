@@ -1,15 +1,14 @@
-FROM ubuntu:20.04
+FROM nginx:alpine   # 或 nginx:alpine，都行
 
-# 更新系统并安装 Nginx
-RUN apt update && apt install -y nginx
+# 复制你的静态文件（推荐用 . 复制全部，避免漏文件）
+COPY . /usr/share/nginx/html/
 
-# 复制自定义网页文件到 Nginx 的默认根目录
-# 假设您在宿主机（WSL）的当前目录创建了 index.html
-COPY index.html /var/www/html/
+# 强制在 server 块里添加 charset（最高优先级，不会失效）
+RUN sed -i '/server {/a \    charset utf-8;' /etc/nginx/conf.d/default.conf
 
-# 声明容器将对外暴露 80 端口（可选，但推荐）
+# 可选：更保险，同时强制所有 text/* 类型加 charset
+RUN sed -i 's|include /etc/nginx/mime.types;|include /etc/nginx/mime.types;\n    default_type text/html;\n    charset utf-8;|' /etc/nginx/nginx.conf
+
 EXPOSE 80
-
-# 容器启动时运行 Nginx 服务，并保持前台运行
 CMD ["nginx", "-g", "daemon off;"]
 
