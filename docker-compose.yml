@@ -1,25 +1,30 @@
-
 services:
-  # 1. Web 服务 (使用您 Day 11 定制的 Nginx 镜像)
-  web:
-    image: my-custom-webserver:v1 # 使用您构建的定制镜像
+  web-dev:
+    image: nginx:latest
+    container_name: dev-server-v3
     ports:
-      - "80:80" # 将宿主机的 80 端口映射到容器的 80 端口
-    depends_on:
-      - db # 依赖于 db 服务，确保 db 先启动
-
-  # 2. 数据库服务 (使用官方 PostgreSQL 镜像)
-  db:
-    image: postgres:latest
-    restart: unless-stopped
-    environment:
-      # 设置数据库的初始配置，生产环境中必须保密
-      POSTGRES_DB: ${POSTGRES_DB}
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD} 
+      - "8080:80"
     volumes:
-      - postgres_data:/var/lib/postgresql # 数据卷：用于持久化数据
+      - .:/usr/share/nginx/html
+    networks:
+      - app-network
+    environment:
+      - PLAYER_NAME=Sawamura_Eijun
 
-# 定义数据卷，用于存储数据库文件
+  # 模拟一个后端数据库，感受一下“集群”的感觉
+  db:
+    image: mysql:8.0
+    container_name: dev-db
+    environment:
+      MYSQL_ROOT_PASSWORD: example_password
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
 volumes:
-  postgres_data:
+  db_data:

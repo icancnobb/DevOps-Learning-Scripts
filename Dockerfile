@@ -1,7 +1,7 @@
 FROM nginx:alpine   
 
 # 复制你的静态文件（推荐用 . 复制全部，避免漏文件）
-COPY . /usr/share/nginx/html/
+COPY . /images /app/images
 
 # 强制在 server 块里添加 charset（最高优先级，不会失效）
 RUN sed -i '/server {/a \    charset utf-8;' /etc/nginx/conf.d/default.conf
