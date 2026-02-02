@@ -1,0 +1,13 @@
+me: Docker Config Check
+
+on: [push]  # 只要你往云端推代码，它就启动
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check Docker Compose Syntax
+        run: docker compose config  # 自动检查你的 yml 文件有没有写错
