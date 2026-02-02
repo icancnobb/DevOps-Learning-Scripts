@@ -1,4 +1,4 @@
-me: Docker Hub CI/CD
+name: Docker Hub CI/CD
 
 on:
   push:
